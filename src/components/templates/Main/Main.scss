@@ -1,0 +1,26 @@
+.SwitchBleStatusWrapper {
+    padding-top: 15px;
+    padding-bottom: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SwitchBleStatusContent {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.SwitchBleStatusTitle {
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 20px;
+    margin-top: 6px;
+}
+
+.SwitchBleStatusButton {
+    width: 50px;
+    margin-top: 8px;
+}
