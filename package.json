@@ -14,6 +14,7 @@
     "node-sass": "^5.0.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-bluetooth-serial": "^1.0.0-rc1",
     "react-native-color-picker": "^0.6.0",
     "react-native-sass-transformer": "^1.4.0"
   },
