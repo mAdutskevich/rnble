@@ -1,0 +1,21 @@
+.DeviceListItem {
+    flex: 1;
+    width: 100%;
+    padding: 10px 10px 0;
+}
+
+.DeviceListItemBg {
+    padding: 15px 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.DeviceListItemTitle {
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.DevicesContainer {
+    margin-bottom: 10px;
+}
