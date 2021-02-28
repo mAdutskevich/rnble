@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
@@ -19,7 +20,6 @@
     "react-native": "0.63.4",
     "react-native-bluetooth-serial": "^1.0.0-rc1",
     "react-native-color-picker": "^0.6.0",
-    "react-native-dropdown-picker": "^4.0.2",
     "react-native-sass-transformer": "^1.4.0"
   },
   "devDependencies": {

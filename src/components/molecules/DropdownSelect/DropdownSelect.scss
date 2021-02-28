@@ -1,6 +1,5 @@
 .DropdownSelect {
     position: relative;
-    padding: 0 20px;
 }
 
 .DropdownSelectArrow {
@@ -15,12 +14,12 @@
     height: 50px;
     display: flex;
     justify-content: center;
-    // border-bottom-color: orange;
 }
 
-.DropDownPickerSelect {
+.DropdownSelectPicker {
+    padding: 10px 20px;
     background-color: #fff;
-    // border: none;
+    border-bottom-width: 1px;
     border-bottom-color: orange;
     border-top-color: #fff;
     border-left-color: #fff;
@@ -31,10 +30,7 @@
     border-bottom-right-radius: 0;
 }
 
-// .DropDownPickerDropWrapper {
-//     background-color: red;
-//     border-bottom-color: orange;
-//     border-top-color: orange;
-//     border-left-color: #fff;
-//     border-right-color: #fff;
-// }
+.DropDownPickerSelectText {
+    font-size: 20px;
+    color: #000;
+}

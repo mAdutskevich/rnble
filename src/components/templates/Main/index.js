@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {ImageBackground, Text, View, Switch, FlatList} from 'react-native';
 import styles from './Main.scss';
+import BluetoothSerial from 'react-native-bluetooth-serial';
 import Button from '@/components/atoms/Button';
 import DeviceListItem from '@/components/atoms/DeviceListItem';
 import ImageBg from '@/images/header-bg.png';
-import BluetoothSerial from 'react-native-bluetooth-serial';
-
 import DeviceView from '@/components/templates/DeviceView';
-// import {TriangleColorPicker } from 'react-native-color-picker';
 
 const Main = () => {
   const [bleStatus, setBleStatus] = useState(false);
@@ -55,21 +53,30 @@ const Main = () => {
       .catch((err) => Toast.showShortBottom(err.message));
   };
 
-  const connectDevice = (device) => {
+  const connectDevice = device => {
     console.log('connecting start');
     console.log('device', device);
     setConnectingProcessSatus(true);
 
     // if (device.name == 'BYCIKLE' ) {
-    BluetoothSerial.connect(device.id)
+    BluetoothSerial.connect(device.item.id)
       .then((res) => {
-        console.log(`Connected to device ${device.name}`);
+        console.log(`Connected to device ${device.item.name}`);
 
         setConnectingProcessSatus(false);
         setIsDeviceConnected(true);
       })
       .catch((err) => console.log(err.message));
     // }
+  };
+
+  const disconnectDevice = () => {
+    BluetoothSerial.disconnect();
+  };
+
+  const onExitHandler = () => {
+    disconnectDevice();
+    setIsDeviceConnected(false);
   };
 
   useEffect(() => {
@@ -101,59 +108,72 @@ const Main = () => {
       setBleStatus(false);
       setVisibleDevices([]);
     });
+
+    BluetoothSerial.on('connectionLost', () => {
+      onExitHandler();
+    });
   }, []);
 
   return (
-  // <View style={styles.MainContainer}>
-  //     <ImageBackground
-  //         source={ImageBg}
-  //         style={styles.SwitchBleStatusWrapper}
-  //     >
-  //         <View
-  //             style={styles.SwitchBleStatusContent}
-  //         >
-  //             <Text
-  //                 style={styles.SwitchBleStatusTitle}
-  //             >
-  //                 Turn On Bluetooth
-  //             </Text>
+    <View style={styles.MainContainer}>
+      {!isDeviceConnected && 
+        <View>
+          <ImageBackground
+            source={ImageBg}
+            style={styles.SwitchBleStatusWrapper}
+          >
+            <View
+              style={styles.SwitchBleStatusContent}
+            >
+              <Text
+                style={styles.SwitchBleStatusTitle}
+              >
+                Turn On Bluetooth
+              </Text>
 
-  //             <View
-  //                 style={styles.SwitchBleStatusButton}
-  //             >
-  //                 <Switch
-  //                     trackColor={{true: 'white', false: '#e2e2e2'}}
-  //                     thumbColor={bleStatus ? "#FAD961" : "#ffffff"}
-  //                     value={bleStatus}
-  //                     onValueChange={bleStatusHandler}
-  //                 />
-  //             </View>
-  //         </View>
+              <View
+                style={styles.SwitchBleStatusButton}
+              >
+                <Switch
+                  trackColor={{true: 'white', false: '#e2e2e2'}}
+                  thumbColor={bleStatus ? '#FAD961' : '#ffffff'}
+                  value={bleStatus}
+                  onValueChange={bleStatusHandler}
+                />
+              </View>
+            </View>
 
-  //         <Button
-  //             title="Refresh Devices"
-  //             onPress={refreshDevices}
-  //             isDisabled={!bleStatus}
-  //         />
-  //     </ImageBackground>
+            <Button
+              title="Refresh Devices"
+              onPress={refreshDevices}
+              isDisabled={!bleStatus}
+            />
+          </ImageBackground>
 
-  //     <FlatList
-  //         style={styles.DevicesContainer}
-  //         data={visibleDevices}
-  //         initialNumToRender={visibleDevices.length}
-  //         keyExtractor={item => `${Math.floor(Math.random() * 1001)}-${item.name}`}
-  //         renderItem={item => {
-  //             return (
-  //                 <DeviceListItem
-  //                     onPress={connectDevice}
-  //                     title={item.item.name ? item.item.name : item.item.id}
-  //                 />
-  //             )
-  //         }}
-  //     />
-  // </View>
+          <FlatList
+            style={styles.DevicesContainer}
+            data={visibleDevices}
+            initialNumToRender={visibleDevices.length}
+            keyExtractor={item => `${Math.floor(Math.random() * 1001)}-${item.name}`}
+            renderItem={item => {
+              return (
+                <DeviceListItem
+                  onPressHandler={connectDevice}
+                  title={item.item.name ? item.item.name : item.item.id}
+                  device={item}
+                />
+              );
+            }}
+          />
+        </View>
+      }
 
-    <DeviceView />
+      {isDeviceConnected && 
+        <DeviceView 
+          onExit={onExitHandler}
+        />
+      }
+    </View>
   );
 };
 

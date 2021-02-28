@@ -1,9 +1,14 @@
 .ButtonContainer {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 15px 20px;
+    border-radius: 30px;
     background-color: white;
+}
+
+.ButtonContainerPrimary {
+    background-color: #F76B1C;
 }
 
 .ButtonContainerDisabled {
@@ -14,6 +19,10 @@
     font-size: 16px;
     font-weight: bold;
     color: #F76B1C;
+}
+
+.ButtonTextPrimary {
+    color: white;
 }
 
 .ButtonTextDisabled {

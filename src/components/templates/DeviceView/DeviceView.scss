@@ -1,6 +1,16 @@
 .DeviceView {
-    flex: 1;
+    position: relative;
+    display: flex;
     flex-direction: column;
+}
+
+.DeviceViewDropdownWrapper {
+    position: relative;
+    z-index: 10;
+}
+
+.DeviceViewLedOptionsWrapper {
+    z-index: -10;
 }
 
 .exitContainer {

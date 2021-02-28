@@ -4,10 +4,14 @@ import PropTypes from 'prop-types';
 import styles from './DeviceListItem.scss';
 import ImageBg from '@/images/header-bg.png';
 
-const DeviceListItem = ({ title, onPress }) => {
+const DeviceListItem = ({ device, title, onPressHandler }) => {
+  const chooseItemHandler = () => {
+    onPressHandler(device);
+  };
+
   return (
     <TouchableOpacity 
-      onPress={onPress}
+      onPress={chooseItemHandler}
       style={styles.DeviceListItem}
     >
       <ImageBackground
@@ -25,8 +29,9 @@ const DeviceListItem = ({ title, onPress }) => {
 };
 
 DeviceListItem.propTypes = {
+  device: PropTypes.object,
   title: PropTypes.string,
-  onPress: PropTypes.func,
+  onPressHandler: PropTypes.func,
 };
 
 DeviceListItem.defaultProps = {
