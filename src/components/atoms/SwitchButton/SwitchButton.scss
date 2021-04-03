@@ -1,13 +1,17 @@
 .SwitchButtonWrapper {
-    padding: 0 10px;
+    margin-top: 10px;
+    display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .SwitchButtonTitle {
     text-align: center;
-    color: #000;
-    font-size: 20px;
+    font-size: 18px;
+    color: #636363; 
+    font-family: 'rubik-medium';
+    text-transform: uppercase;
 }
 
 .SwitchButtonStatusButton {

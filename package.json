@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
+    "@react-native-async-storage/async-storage": "^1.15.1",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
@@ -20,7 +21,8 @@
     "react-native": "0.63.4",
     "react-native-bluetooth-serial": "^1.0.0-rc1",
     "react-native-color-picker": "^0.6.0",
-    "react-native-sass-transformer": "^1.4.0"
+    "react-native-sass-transformer": "^1.4.0",
+    "react-native-svg": "^12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.17",

@@ -1,0 +1,21 @@
+.SettingsView {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+.SettingsViewHeader {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #FFB422;
+    padding: 0 20px;
+}
+
+.SettingsViewContent {
+    padding: 0 20px 20px;
+}

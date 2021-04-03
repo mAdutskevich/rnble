@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 import styles from './RangePicker.scss';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
-const RangePicker = ({ title, onChange, initialValue }) => {
+const RangePicker = ({ title, onChange, initialValue, minValue, maxValue }) => {
   const [sliderOneValue, setSliderOneValue] = useState(initialValue);
   const windowWidth = Dimensions.get('window').width;
+  console.log('minValue', minValue);
+  console.log('maxValue', maxValue);
 
   const sliderOneValuesChange = value => {
+    console.log('value', value);
     setSliderOneValue(value);
     onChange(value);
   };
@@ -21,7 +24,7 @@ const RangePicker = ({ title, onChange, initialValue }) => {
         <Text
           style={styles.RangePickerTitle}
         >
-          {title}: {Math.ceil(sliderOneValue / 255 * 100)}
+          {title}: {Math.ceil((sliderOneValue - minValue)/(maxValue - minValue) * 100 )}
         </Text>
       }
 
@@ -30,9 +33,9 @@ const RangePicker = ({ title, onChange, initialValue }) => {
       >
         <MultiSlider
           values={sliderOneValue}
-          sliderLength={windowWidth - 70}
-          min={0}
-          max={255}
+          sliderLength={windowWidth - 40}
+          min={minValue}
+          max={maxValue}
           step={1}
           onValuesChange={sliderOneValuesChange}
         />
@@ -50,6 +53,8 @@ RangePicker.propTypes = {
 RangePicker.defaultProps = {
   title: 'Range Title',
   initialValue: [8],
+  minValue: 0,
+  maxValue: 255,
 };
 
 export default RangePicker;

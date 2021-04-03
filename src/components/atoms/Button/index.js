@@ -1,46 +1,57 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import styles from './Button.scss';
 
-const Button = ({ title, isDisabled, onPress, buttonPrimary }) => {
+const Button = ({
+  title,
+  icon,
+  isPadding,
+  appearance,
+  onPress,
+  isDisabled,
+}) => {
+  console.log('isDisabled from button', isDisabled);
+
   const buttonContainerStyles = [
     styles.ButtonContainer,
-    isDisabled ? styles.ButtonContainerDisabled : null,
-    buttonPrimary ? styles.ButtonContainerPrimary : null,
+    appearance === 'primary' && styles.ButtonContainerPrimary,
+    appearance === 'seconfary' && styles.ButtonContainerSecondary,
+    isPadding && styles.ButtonContainerPadding,
+    isDisabled && styles.ButtonContainerDisabled
   ];
 
-  const buttonTextStyles = [
-    styles.ButtonText,
-    isDisabled ? styles.ButtonTextDisabled : null,
-    buttonPrimary ? styles.ButtonTextPrimary : null,
-  ];
+  console.log('isDisabled', isDisabled);
 
   return (
     <TouchableOpacity
       onPress={onPress}
       style={buttonContainerStyles}
     >
-      <Text
-        style={buttonTextStyles}
-      >
-        {title}
-      </Text>
+      {icon ? icon : null}
+
+      {!!title &&
+        <Text
+          style={styles.ButtonText}
+        >
+          {title}
+        </Text>
+      }
     </TouchableOpacity>
   );
 };
 
 Button.propTypes = {
-  title: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  onPress: PropTypes.func,
-  buttonPrimary: PropTypes.bool,
+  title: propTypes.string,
+  icon: propTypes.element,
+  isPadding: propTypes.bool,
+  isDisabled: propTypes.bool,
+  appearance: propTypes.string,
+  onPress: propTypes.func,
 };
 
 Button.defaultProps = {
-  title: 'Button',
-  isDisabled: false,
-  buttonPrimary: false,
+  //
 };
 
 export default Button;

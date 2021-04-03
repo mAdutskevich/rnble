@@ -2,35 +2,32 @@
     position: relative;
 }
 
-.DropdownSelectArrow {
-    position: absolute;
-    width: 15px;
-    height: 9px;
-    right: 16px;
-    top: 20px;
-}
-
-.DropDownPickerContainer {
-    height: 50px;
-    display: flex;
-    justify-content: center;
-}
-
 .DropdownSelectPicker {
-    padding: 10px 20px;
-    background-color: #fff;
-    border-bottom-width: 1px;
-    border-bottom-color: orange;
-    border-top-color: #fff;
-    border-left-color: #fff;
-    border-right-color: #fff;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 20px;
+    background-color: transparent;
+    border-bottom-width: 2px;
+    border-bottom-color: #D5D5D5;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
+.DropdownSelectArrow {
+    position: absolute;
+    right: 20px;
+}
+
 .DropDownPickerSelectText {
-    font-size: 20px;
-    color: #000;
+    font-size: 18px;
+    color: #636363;
+    font-family: 'rubik-medium';
+    text-transform: uppercase;
 }

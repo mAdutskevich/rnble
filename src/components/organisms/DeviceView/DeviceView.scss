@@ -1,0 +1,16 @@
+.DeviceView {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.DeviceViewHeader {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #FFB422;
+    padding: 0 20px;
+}

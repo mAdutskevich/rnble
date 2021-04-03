@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text} from 'react-native';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import styles from './OptionListItem.scss';
 
 const OptionListItem = ({ option, title, onPressHandler }) => {
@@ -23,9 +23,9 @@ const OptionListItem = ({ option, title, onPressHandler }) => {
 };
 
 OptionListItem.propTypes = {
-  option: PropTypes.object,
-  title: PropTypes.string,
-  onPressHandler: PropTypes.func,
+  option: propTypes.object,
+  title: propTypes.string,
+  onPressHandler: propTypes.func,
 };
 
 OptionListItem.defaultProps = {

@@ -1,44 +1,69 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
-  ImageBackground,
   View
 } from 'react-native';
 import styles from './DeviceView.scss';
 import BluetoothSerial from 'react-native-bluetooth-serial';
-import BackButton from '@/components/atoms/BackButton';
 import DropdownSelect from '@/components/molecules/DropdownSelect';
-import ImageBg from '@/images/header-bg.png';
 import LedOptions from '@/components/organisms/LedOptions';
+import Button from '@/components/atoms/Button';
+import IconBack from '@/icons/IconBack';
+import IconSettings from '@/icons/IconSettings';
 
 const pickerOptions = [
   {
     label: 'Plain',
     value: 'plain',
+    idNum: 0,
   },
   {
     label: 'Blink',
     value: 'blink',
+    idNum: 1,
   },
   {
     label: 'Sinelon',
     value: 'sinelon',
+    idNum: 2,
   },
   {
     label: 'Rainbow',
     value: 'rainbow',
+    idNum: 3,
   },
 ];
 
-const DeviceView = ({ onExit }) => {
+const DeviceView = ({ onExit, onSettingsClick }) => {
   const [selectedOption, setSelectedOption] = useState(pickerOptions[0]);
-  const [color, setColor] = useState({h: 122, s: 1, v: 1});
-  const [brightness, setBrightness] = useState([150]);
-  const [step, setStep] = useState([20]);
+  const [color, setColor] = useState({h: 84, s: 0, v: 255});
+  const [brightness, setBrightness] = useState([100]);
   const [delay, setDelay] = useState([20]);
+  const [minDelay, setMinDelay] = useState(0);
+  const [maxDelay, setMaxDelay] = useState(2000);
   const [smoothness, setSmoothness] = useState(false);
+
+  const disconnectDevice = () => {
+    BluetoothSerial.disconnect();
+  };
   
   const dropdownChangeHandler = (item) => {
     setSelectedOption(item);
+
+    console.log('item', item);
+    if (item.value === 'blink') {
+      if (smoothness) {
+        setMinDelay(100);
+        setMaxDelay(4000);
+        setDelay([100]);
+      } else {
+        setMinDelay(50);
+        setMaxDelay(500);
+        setDelay([300]);
+      }
+    } else if (item.value === 'rainbow') {
+      setMinDelay(10);
+      setMaxDelay(30);
+    }
   };
 
   const colorChangeHandler = value => {
@@ -69,14 +94,24 @@ const DeviceView = ({ onExit }) => {
     console.log('delay', value);
   };
 
-  const stepChangeHandler = value => {
-    setStep(value);
-    console.log('step', value);
+  const handleOnExit = () => {
+    disconnectDevice();
+    onExit();
   };
 
   const smoothChangeHandler = value => {
     setSmoothness(value);
     console.log('smoothness', value);
+
+    if (value) {
+      setMinDelay(100);
+      setMaxDelay(4000);
+      setDelay([100]);
+    } else {
+      setMinDelay(50);
+      setMaxDelay(500);
+      setDelay([300]);
+    }
   };
 
   const setOptionsHandler = () => {
@@ -85,12 +120,12 @@ const DeviceView = ({ onExit }) => {
 
   const sendOptions = () => {
     BluetoothSerial.write(`
-      $${selectedOption.value}
+      $empty
+      $${selectedOption.idNum}
       $${brightness}
       $${color.h}$${color.s}$${color.v}
       $${+smoothness}
       $${delay}
-      $${step}
     `)
       .then((res) => {
         console.log(res);
@@ -103,15 +138,34 @@ const DeviceView = ({ onExit }) => {
     <View
       style={styles.DeviceView}
     >
-      <ImageBackground
-        source={ImageBg}
-        style={styles.exitContainer}
+      <View
+        style={styles.DeviceViewHeader}
       >
-        <BackButton
-          onPress={onExit}
+        <Button
+          icon={
+            <IconBack
+              width="40"
+              height="40"
+              viewBox="0 0 50 50"
+              fill="#fff"
+            />
+          }
+          onPress={handleOnExit}
         />
-      </ImageBackground>
 
+        <Button
+          icon={
+            <IconSettings
+              width="40"
+              height="40"
+              viewBox="0 0 50 50"
+              fill="#fff"
+            />
+          }
+          onPress={onSettingsClick}
+        />
+      </View>
+      
       <DropdownSelect
         options={pickerOptions}
         onChange={dropdownChangeHandler}
@@ -121,12 +175,12 @@ const DeviceView = ({ onExit }) => {
         initialColor={color}
         initialBrightness={brightness}
         initialDelay={delay}
-        initialStep={step}
         initialSmooth={smoothness}
+        minDelayValue={minDelay}
+        maxDelayValue={maxDelay}
         brightnessChange={brightnessChangeHandler}
         colorChange={colorChangeHandler}
         delayChange={delayChangeHandler}
-        stepChange={stepChangeHandler}
         smoothChange={smoothChangeHandler}
         setOptions={setOptionsHandler}
         selectedOption={selectedOption}

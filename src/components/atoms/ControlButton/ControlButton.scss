@@ -1,0 +1,14 @@
+.ControlButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #d5d5d5;
+    height: 80px;
+    width: 100%;
+}
+
+.ControlButtonContainerActive {
+    background-color: #ffb422;
+}

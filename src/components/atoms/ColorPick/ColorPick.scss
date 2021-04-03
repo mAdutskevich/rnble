@@ -1,6 +1,13 @@
+.ColorPick {
+  height: 240px;
+}
+
 .ColorPickTitle {
-  font-size: 20px;
-  padding-left: 10px;
+  font-size: 18px;
+  color: #636363; 
+  font-family: 'rubik-medium';
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 .ColorPickModule {

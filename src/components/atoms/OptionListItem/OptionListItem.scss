@@ -1,16 +1,19 @@
 .OptionListItem {
     flex: 1;
     width: 100%;
-    padding: 5px 20px 5px;
-    border-bottom-width: 1px;
-    border-bottom-color: orange;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #D5D5D5;
+    border-bottom-width: 2px;
+    border-bottom-color: #fff;
 }
 
 .OptionListItemTitle {
-    font-size: 16px;
-    color: #000;
-}
-
-.DevicesContainer {
-    margin-bottom: 10px;
+    font-size: 18px;
+    color: #fff;
+    font-family: 'rubik-medium';
+    text-transform: uppercase;
 }

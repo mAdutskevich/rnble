@@ -20,6 +20,8 @@
 		795D084D06E345AF48240D59 /* libPods-rnble-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7920EECCD86CEA30C7653D84 /* libPods-rnble-tvOSTests.a */; };
 		7F69E19F58E87194E3687861 /* libPods-rnble.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3240D935739669C29BA2AC /* libPods-rnble.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		65391686337B479086074BB0 /* rubik-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9C3FC9F2A844D6D86D59F4A /* rubik-medium.ttf */; };
+		C4F277DB972143969E0CD3F3 /* rubik-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C183542B1EF402598F66B5C /* rubik-regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F9D8B450770F474B9C6E456F /* libPods-rnble-rnbleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rnble-rnbleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE6938DF38C3426251029D7F /* Pods-rnble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnble.release.xcconfig"; path = "Target Support Files/Pods-rnble/Pods-rnble.release.xcconfig"; sourceTree = "<group>"; };
+		A9C3FC9F2A844D6D86D59F4A /* rubik-medium.ttf */ = {isa = PBXFileReference; name = "rubik-medium.ttf"; path = "../assets/fonts/rubik-medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9C183542B1EF402598F66B5C /* rubik-regular.ttf */ = {isa = PBXFileReference; name = "rubik-regular.ttf"; path = "../assets/fonts/rubik-regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				CE4AD623E33806E2703709E8 /* Pods */,
+				75215EAD92B04B29AC9EBAC1 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -197,6 +202,16 @@
 			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		75215EAD92B04B29AC9EBAC1 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				A9C3FC9F2A844D6D86D59F4A /* rubik-medium.ttf */,
+				9C183542B1EF402598F66B5C /* rubik-regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -342,6 +357,8 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				65391686337B479086074BB0 /* rubik-medium.ttf in Resources */,
+				C4F277DB972143969E0CD3F3 /* rubik-regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

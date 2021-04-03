@@ -1,10 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, Text, ImageBackground} from 'react-native';
-import PropTypes from 'prop-types';
+import { TouchableOpacity, Text, View, ImageBackground} from 'react-native';
+import propTypes from 'prop-types';
 import styles from './DeviceListItem.scss';
-import ImageBg from '@/images/header-bg.png';
 
-const DeviceListItem = ({ device, title, onPressHandler }) => {
+const DeviceListItem = ({ device, title, onPressHandler, isActive }) => {
+  const deviceListItemStyles = [
+    styles.DeviceListItem,
+    isActive ? styles.DeviceListItemActive : null
+  ];
+
   const chooseItemHandler = () => {
     onPressHandler(device);
   };
@@ -12,26 +16,26 @@ const DeviceListItem = ({ device, title, onPressHandler }) => {
   return (
     <TouchableOpacity 
       onPress={chooseItemHandler}
-      style={styles.DeviceListItem}
+      style={styles.DeviceListItemWrapper}
     >
-      <ImageBackground
-        source={ImageBg}
-        style={styles.DeviceListItemBg}
+      <View
+        style={deviceListItemStyles}
       >
         <Text
           style={styles.DeviceListItemTitle}
         >
           {title}
         </Text>
-      </ImageBackground>
+      </View>
     </TouchableOpacity>
   );
 };
 
 DeviceListItem.propTypes = {
-  device: PropTypes.object,
-  title: PropTypes.string,
-  onPressHandler: PropTypes.func,
+  device: propTypes.object,
+  title: propTypes.string,
+  isActive: propTypes.bool,
+  onPressHandler: propTypes.func,
 };
 
 DeviceListItem.defaultProps = {

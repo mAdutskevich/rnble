@@ -1,21 +1,27 @@
-.DeviceListItem {
-    flex: 1;
+.DeviceListItemWrapper {
+    // flex: 1;
     width: 100%;
-    padding: 10px 10px 0;
+    height: 60px;
+    padding-bottom: 10px;
 }
 
-.DeviceListItemBg {
-    padding: 15px 10px;
-    border-radius: 10px;
-    overflow: hidden;
+.DeviceListItem {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D5D5D5;
+    border-radius: 8px;
+}
+
+.DeviceListItemActive {
+    background-color: #FFB422;
 }
 
 .DeviceListItemTitle {
-    font-size: 16px;
+    font-size: 18px;
     color: #fff;
-    font-weight: bold;
-}
-
-.DevicesContainer {
-    margin-bottom: 10px;
+    font-family: 'rubik-medium';
+    text-transform: uppercase;
 }

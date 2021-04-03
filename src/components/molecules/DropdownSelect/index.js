@@ -3,9 +3,12 @@ import {View, Text, FlatList, TouchableOpacity, ImageBackground} from 'react-nat
 import PropTypes from 'prop-types';
 import styles from './DropdownSelect.scss';
 import OptionListItem from '@/components/atoms/OptionListItem';
-import ImageArrow from '@/images/arrow.png';
+import IconArrow from '@/icons/IconArrow';
 
-const DropdownSelect = ({ options, onChange }) => {
+const DropdownSelect = ({
+  options,
+  onChange 
+}) => {
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,16 +36,21 @@ const DropdownSelect = ({ options, onChange }) => {
           {selectedOption.label}
         </Text>
 
-        <ImageBackground
-          source={ImageArrow}
+        <View
           style={styles.DropdownSelectArrow}
-        />
+        >
+          <IconArrow 
+            width="20"
+            heigth="20"
+            viewBox="0 0 50 50"
+            fill="#636363"
+          />
+        </View>
       </TouchableOpacity>
 
       {isOpen && 
         <View>
           <FlatList
-            style={styles.OptionsContainer}
             data={options}
             initialNumToRender={options.length}
             keyExtractor={item => `${Math.floor(Math.random() * 10000000)}-${item.value}`}

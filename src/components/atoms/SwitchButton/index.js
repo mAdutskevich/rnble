@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Switch } from 'react-native';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import styles from './SwitchButton.scss';
 
 const SwitchButton = ({ title, value, onChange }) => {
@@ -29,13 +29,13 @@ const SwitchButton = ({ title, value, onChange }) => {
 };
 
 SwitchButton.propTypes = {
-  title: PropTypes.string,
-  value: PropTypes.bool,
-  onPress: PropTypes.func,
+  title: propTypes.string,
+  value: propTypes.bool,
+  onPress: propTypes.func,
 };
 
 SwitchButton.defaultProps = {
-  title: 'Switch Button',
+  title: '',
   value: false,
 };
   

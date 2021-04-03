@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './LedOptions';
@@ -12,24 +12,28 @@ const LedOptions = (
     initialColor, 
     initialBrightness,
     initialDelay,
-    initialStep,
     initialSmooth,
     brightnessChange, 
     colorChange, 
     delayChange,
-    stepChange,
     smoothChange,
-    setOptions,
+    minDelayValue,
+    maxDelayValue,
     selectedOption,
-  }) => {
+    setOptions,
+}) => {
+  const [isDisabledSetOptions, setIsDisabledSetOptions] = useState(false)
   const brightnessPickerStore = ['plain', 'blink', 'sinelon', 'rainbow'];
   const colorPickerStore = ['plain', 'blink', 'sinelon'];
   const smoothPickerStore = ['blink'];
-  const stepPickerStore = ['blink'];
   const delayPickerStore = ['blink'];
 
   const showSatusChecker = (optionStore, selectedOption) => 
     optionStore.some(option => option === selectedOption.value);
+
+  const handleSetOptions = () => {
+    setOptions();
+  }
 
   return (
     <ScrollView 
@@ -79,18 +83,8 @@ const LedOptions = (
             title="Delay"
             onChange={delayChange}
             initialValue={initialDelay}
-          />
-        </View>
-      }
-
-      {showSatusChecker(stepPickerStore, selectedOption) &&
-        <View 
-          style={styles.LedOptionsRangePickerWrapper}
-        >
-          <RangePicker
-            title="Step"
-            onChange={stepChange}
-            initialValue={initialStep}
+            minValue={minDelayValue}
+            maxValue={maxDelayValue}
           />
         </View>
       }
@@ -98,10 +92,12 @@ const LedOptions = (
       <View 
         style={styles.LedOptionsButtonWrapper}
       >
-        <Button 
+        <Button
           title="Set Options"
-          onPress={setOptions}
+          appearance="primary"
+          onPress={handleSetOptions}
           buttonPrimary
+          isDisabled={isDisabledSetOptions}
         />
       </View>
     </ScrollView>
@@ -132,6 +128,7 @@ LedOptions.defaultProps = {
   selectedOption: {
     label: 'Plain',
     value: 'plain',
+    numId: 0,
   }
 };
 

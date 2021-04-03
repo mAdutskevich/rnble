@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { TriangleColorPicker } from 'react-native-color-picker';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import styles from './ColorPick';
 
 const ColorPick = ({ initialValue, title, onChange }) => (
-  <View>
+  <View
+    style={styles.ColorPick}
+  >
     {!!title && 
       <Text
         style={styles.ColorPickTitle}
@@ -23,9 +25,9 @@ const ColorPick = ({ initialValue, title, onChange }) => (
 );
 
 ColorPick.propTypes = {
-  title: PropTypes.string,
-  onChange: PropTypes.func,
-  initialValue: PropTypes.object,
+  title: propTypes.string,
+  onChange: propTypes.func,
+  initialValue: propTypes.object,
 };
 
 ColorPick.defaultProps = {
