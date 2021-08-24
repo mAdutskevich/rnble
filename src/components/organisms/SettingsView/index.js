@@ -11,7 +11,7 @@ import IconBack from '@/icons/IconBack';
 import FormInput from '@/components/atoms/FormInput';
 
 const SettingsView = ({
-  onExitSettingsClick
+  onExitSettingsClick,
 }) => {
   const [ledQuantity, setLedQuantity] = useState(null);
 
@@ -36,8 +36,8 @@ const SettingsView = ({
       if(value !== null) {
         setLedQuantity(value);
       } else {
-        storeData('@ledQuantity', 0);
-        setLedQuantity(0);
+        storeData('@ledQuantity', 10);
+        setLedQuantity(10);
       }
     } catch(e) {
       // error reading value

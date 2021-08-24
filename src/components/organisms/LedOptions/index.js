@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './LedOptions';
 import ColorPick from '@/components/atoms/ColorPick';
@@ -23,8 +23,8 @@ const LedOptions = (
     setOptions,
 }) => {
   const [isDisabledSetOptions, setIsDisabledSetOptions] = useState(false)
-  const brightnessPickerStore = ['plain', 'blink', 'sinelon', 'rainbow'];
-  const colorPickerStore = ['plain', 'blink', 'sinelon'];
+  const brightnessPickerStore = ['plain', 'blink', 'sinelon', 'rainbow', 'sequential'];
+  const colorPickerStore = ['plain', 'blink', 'sinelon', 'sequential'];
   const smoothPickerStore = ['blink'];
   const delayPickerStore = ['blink'];
 
@@ -33,6 +33,7 @@ const LedOptions = (
 
   const handleSetOptions = () => {
     setOptions();
+    Alert.alert('', 'Options successfully sent to device');
   }
 
   return (
@@ -120,7 +121,7 @@ LedOptions.propTypes = {
 };
 
 LedOptions.defaultProps = {
-  initialColor: {h: 122, s: 1, v: 1},
+  initialColor: {h: 94, s: 255, v: 255},
   initialBrightness: [150],
   initialDelay: [8],
   initialStep: [8],

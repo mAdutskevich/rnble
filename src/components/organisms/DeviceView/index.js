@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View
 } from 'react-native';
 import styles from './DeviceView.scss';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import BluetoothSerial from 'react-native-bluetooth-serial';
 import DropdownSelect from '@/components/molecules/DropdownSelect';
 import LedOptions from '@/components/organisms/LedOptions';
@@ -31,16 +32,43 @@ const pickerOptions = [
     value: 'rainbow',
     idNum: 3,
   },
+  {
+    label: 'Sequential',
+    value: 'sequential',
+    idNum: 4,
+  },
 ];
 
 const DeviceView = ({ onExit, onSettingsClick }) => {
   const [selectedOption, setSelectedOption] = useState(pickerOptions[0]);
-  const [color, setColor] = useState({h: 84, s: 0, v: 255});
+  const [color, setColor] = useState({h: 94, s: 255, v: 255});
   const [brightness, setBrightness] = useState([100]);
   const [delay, setDelay] = useState([20]);
   const [minDelay, setMinDelay] = useState(0);
   const [maxDelay, setMaxDelay] = useState(2000);
   const [smoothness, setSmoothness] = useState(false);
+  const [ledQuantity, setLedQuantity] = useState(null);
+
+  useEffect(() => {
+    getData('@ledQuantity');
+  }, []);
+
+  console.log('ledQuantity', ledQuantity);
+  const getData = async (key) => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      console.log('led quantity', value);
+
+      if(value !== null) {
+        setLedQuantity(value);
+      } else {
+        storeData('@ledQuantity', 5);
+        setLedQuantity(5);
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
 
   const disconnectDevice = () => {
     BluetoothSerial.disconnect();
@@ -49,7 +77,7 @@ const DeviceView = ({ onExit, onSettingsClick }) => {
   const dropdownChangeHandler = (item) => {
     setSelectedOption(item);
 
-    console.log('item', item);
+    // console.log('item', item);
     if (item.value === 'blink') {
       if (smoothness) {
         setMinDelay(100);
@@ -86,12 +114,12 @@ const DeviceView = ({ onExit, onSettingsClick }) => {
 
   const brightnessChangeHandler = value => {
     setBrightness(value);
-    console.log('brightness', value);
+    // console.log('brightness', value);
   };
   
   const delayChangeHandler = value => {
     setDelay(value);
-    console.log('delay', value);
+    // console.log('delay', value);
   };
 
   const handleOnExit = () => {
@@ -101,7 +129,7 @@ const DeviceView = ({ onExit, onSettingsClick }) => {
 
   const smoothChangeHandler = value => {
     setSmoothness(value);
-    console.log('smoothness', value);
+    // console.log('smoothness', value);
 
     if (value) {
       setMinDelay(100);
@@ -119,13 +147,15 @@ const DeviceView = ({ onExit, onSettingsClick }) => {
   };
 
   const sendOptions = () => {
+    console.log('ledQuantity before send', ledQuantity);
     BluetoothSerial.write(`
-      $empty
+      111111111111111111111111$empty
       $${selectedOption.idNum}
       $${brightness}
       $${color.h}$${color.s}$${color.v}
       $${+smoothness}
       $${delay}
+      $${parseInt(ledQuantity, 10)}
     `)
       .then((res) => {
         console.log(res);

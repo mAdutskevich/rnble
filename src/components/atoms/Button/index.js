@@ -11,7 +11,7 @@ const Button = ({
   onPress,
   isDisabled,
 }) => {
-  console.log('isDisabled from button', isDisabled);
+  // console.log('isDisabled from button', isDisabled);
 
   const buttonContainerStyles = [
     styles.ButtonContainer,
@@ -21,7 +21,7 @@ const Button = ({
     isDisabled && styles.ButtonContainerDisabled
   ];
 
-  console.log('isDisabled', isDisabled);
+  // console.log('isDisabled', isDisabled);
 
   return (
     <TouchableOpacity

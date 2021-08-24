@@ -1,3 +1,4 @@
+
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -16,7 +17,8 @@ import IconSettings from '@/icons/IconSettings';
 
 
 const ConnectionView = ({
-  onSettingsClick
+  onSettingsClick,
+  setIsDeviceConnected
 }) => {
   const [bluetoothStatus, setBluetoothStatus] = useState(false);
   const [visibleDevices, setVisibleDevices] = useState([]);
@@ -34,16 +36,18 @@ const ConnectionView = ({
   };
 
   const handleRefreshDevices = () => {
-    console.log('refresh devices');
+    setVisibleDevices([]);
 
-    const devicesPromise = new Promise((resolve) => {
-      resolve(BluetoothSerial.list());
-    });
-
-    devicesPromise.then((devices) => {
-      console.log('devices from bluetoothEnabled', devices);
-      setVisibleDevices(devices);
-    });
+    setTimeout(() => {
+      const devicesPromise = new Promise((resolve) => {
+        resolve(BluetoothSerial.list());
+      });
+  
+      devicesPromise.then((devices) => {
+        console.log('devices from bluetoothEnabled', devices);
+        setVisibleDevices(devices);
+      });
+    }, 1000);
   };
 
   const enableBle = () => {
@@ -57,21 +61,21 @@ const ConnectionView = ({
   const disableBle = () => {
     BluetoothSerial.disable()
       .then((isEnabled) => {
-        console.log('isEnabled', isEnabled);
+        // console.log('isEnabled', isEnabled);
         setBluetoothStatus(isEnabled);
       })
       .catch((err) => Toast.showShortBottom(err.message));
   };
 
   const connectDevice = device => {
-    console.log('connecting start');
-    console.log('device', device);
+    // console.log('connecting start');
+    // console.log('device', device);
     setConnectingProcessSatus(true);
 
     // if (device.name == 'BYCIKLE' ) {
     BluetoothSerial.connect(device.item.id)
       .then((res) => {
-        console.log(`Connected to device ${device.item.name}`);
+        // console.log(`Connected to device ${device.item.name}`);
 
         setConnectingProcessSatus(false);
         setIsDeviceConnected(true);
@@ -84,8 +88,8 @@ const ConnectionView = ({
     Promise.all([BluetoothSerial.isEnabled(), BluetoothSerial.list()]).then(
       (values) => {
         const [isEnabled, devices] = values;
-        console.log('isEnabled', isEnabled);
-        console.log('devices', devices);
+        // console.log('isEnabled', isEnabled);
+        // console.log('devices', devices);
         setBluetoothStatus(isEnabled);
         setVisibleDevices(devices);
       },
@@ -97,20 +101,20 @@ const ConnectionView = ({
       });
 
       devicesPromise.then((devices) => {
-        console.log('devices from bluetoothEnabled', devices);
+        // console.log('devices from bluetoothEnabled', devices);
         setBluetoothStatus(true);
         setVisibleDevices(devices);
       });
     });
 
     BluetoothSerial.on('bluetoothDisabled', () => {
-      console.log('devices from bluetoothDisabled', []);
+      // console.log('devices from bluetoothDisabled', []);
       setBluetoothStatus(false);
       setVisibleDevices([]);
     });
 
     BluetoothSerial.on('connectionLost', () => {
-      onExitHandler();
+      setIsDeviceConnected(false);
     });
   }, []);
 

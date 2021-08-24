@@ -7,11 +7,11 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 const RangePicker = ({ title, onChange, initialValue, minValue, maxValue }) => {
   const [sliderOneValue, setSliderOneValue] = useState(initialValue);
   const windowWidth = Dimensions.get('window').width;
-  console.log('minValue', minValue);
-  console.log('maxValue', maxValue);
+  // console.log('minValue', minValue);
+  // console.log('maxValue', maxValue);
 
   const sliderOneValuesChange = value => {
-    console.log('value', value);
+    // console.log('value', value);
     setSliderOneValue(value);
     onChange(value);
   };

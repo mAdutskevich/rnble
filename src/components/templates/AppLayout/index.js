@@ -21,15 +21,20 @@ const AppLayout = () => {
     setIsSettings(false);
   };
 
+  const handleSetIsDeviceConnected = status => {
+    setIsDeviceConnected(status);
+  };
+
   return (
     <View style={styles.MainContainer}>
-      {isDeviceConnected && !isSettings &&
+      {!isDeviceConnected && !isSettings &&
         <ConnectionView 
           onSettingsClick={handleOnSettingsClick}
+          setIsDeviceConnected={handleSetIsDeviceConnected}
         />
       }
 
-      {!isDeviceConnected && !isSettings &&
+      {isDeviceConnected && !isSettings &&
         <DeviceView 
           onExit={handleOnExit}
           onSettingsClick={handleOnSettingsClick}

@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import styles from './ControlButton.scss';
 
 const ControlButton = ({ isActive, onPress, children }) => {
-  console.log('children', children);
+  // console.log('children', children);
   const controlButtonContainerStyles = [
     styles.ControlButtonContainer,
     isActive ? styles.ControlButtonContainerActive : null
